@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rudra — Developer • Designer • Builder</title>
+    <meta name="description" content="Portfolio of Rudra — Full-stack developer crafting exceptional digital experiences with modern tech.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'space': ['Space Grotesk', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.4)' },
+                            '100%': { boxShadow: '0 0 30px rgba(99, 102, 241, 0.8)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body class="bg-[#fafaf9] dark:bg-[#0a0a0b] text-zinc-900 dark:text-zinc-100 font-inter antialiased overflow-x-hidden transition-colors duration-300">
+    <!-- Noise texture -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.015] dark:opacity-[0.03] z-0" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGZpbHRlcj0idXJsKCNhKSIgdD0iMCIgZD0iTTAgMGgzMDB2MzAwSDB6Ii8+PC9zdmc+');"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 border-b border-transparent">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-[72px]">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center font-space font-bold text-[18px] group-hover:rotate-3 transition-transform">R</div>
+                    <span class="font-space font-semibold text-[17px] tracking-tight">rudraxrd</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#work" class="nav-link text-[14px] font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Work</a>
+                    <a href="#about" class="nav-link text-[14px] font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a>
+                    <a href="#skills" class="nav-link text-[14px] font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Skills</a>
+                    <a href="#contact" class="nav-link text-[14px] font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 flex items-center justify-center transition-colors">
+                        <i class="ri-sun-line dark:hidden text-[18px]"></i>
+                        <i class="ri-moon-line hidden dark:block text-[18px]"></i>
+                    </button>
+                    <a href="#contact" class="hidden md:inline-flex h-9 px-5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-[13px] font-medium items-center hover:scale-[0.98] active:scale-[0.96] transition-transform">Let's Talk</a>
+                    <button id="mobile-menu-btn" class="md:hidden w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                        <i class="ri-menu-3-line text-[20px]"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden absolute top-[72px] left-0 w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 hidden">
+            <div class="px-6 py-6 flex flex-col gap-4">
+                <a href="#work" class="mobile-link text-[16px] font-medium py-2">Work</a>
+                <a href="#about" class="mobile-link text-[16px] font-medium py-2">About</a>
+                <a href="#skills" class="mobile-link text-[16px] font-medium py-2">Skills</a>
+                <a href="#contact" class="mobile-link text-[16px] font-medium py-2">Contact</a>
+                <a href="#contact" class="mt-2 h-11 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center font-medium">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-[100vh] flex items-center pt-[72px] overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-[10%] right-[5%] w-[600px] h-[600px] bg-gradient-to-br from-violet-400/20 via-indigo-400/20 to-fuchsia-400/20 rounded-full blur-[120px] animate-float"></div>
+            <div class="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] bg-gradient-to-tr from-blue-400/15 via-cyan-400/15 to-teal-400/15 rounded-full blur-[100px] animate-float" style="animation-delay: -3s;"></div>
+        </div>
+
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8 w-full py-12 lg:py-20">
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-[12px] font-medium tracking-wide animate-slide-up">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        AVAILABLE FOR NEW PROJECTS
+                    </div>
+
+                    <div class="space-y-6">
+                        <h1 class="font-space font-bold text-[42px] sm:text-[56px] lg:text-[72px] leading-[0.9] tracking-[-0.04em] animate-slide-up" style="animation-delay: 0.1s;">
+                            I build
+                            <span class="relative inline-block">
+                                <span class="relative z-10 bg-gradient-to-r from-violet-600 via-indigo-600 to-fuchsia-600 bg-clip-text text-transparent">exceptional</span>
+                                <div class="absolute bottom-2 left-0 w-full h-3 bg-gradient-to-r from-violet-200 via-indigo-200 to-fuchsia-200 dark:from-violet-900/40 dark:via-indigo-900/40 dark:to-fuchsia-900/40 -z-0 -rotate-1"></div>
+                            </span>
+                            <br>digital products
+                        </h1>
+                        <p class="text-[18px] lg:text-[20px] leading-[1.6] text-zinc-600 dark:text-zinc-400 max-w-[560px] font-light animate-slide-up" style="animation-delay: 0.2s;">
+                            Full-stack developer based in India. I craft fast, accessible, and delightful experiences — from concept to deployment.
+                            <span id="typed-text" class="font-mono text-[15px] text-zinc-900 dark:text-white font-medium"></span><span class="animate-pulse">|</span>
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 animate-slide-up" style="animation-delay: 0.3s;">
+                        <a href="#work" class="h-[48px] px-7 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium text-[15px] inline-flex items-center gap-2 hover:scale-[0.98] active:scale-[0.96] transition-all group">
+                            View Projects
+                            <i class="ri-arrow-right-up-line group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </a>
+                        <a href="#contact" class="h-[48px] px-7 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur font-medium text-[15px] inline-flex items-center gap-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+                            <i class="ri-mail-line"></i>
+                            Contact Me
+                        </a>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-4 animate-slide-up" style="animation-delay: 0.4s;">
+                        <div class="flex items-center gap-3">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-indigo-500 border-2 border-white dark:border-zinc-900 flex items-center justify-center text-white text-[12px] font-bold">R</div>
+                                <div class="w-8 h-8 rounded-full bg-zinc-900 dark:bg-white border-2 border-white dark:border-zinc-900 flex items-center justify-center">
+                                    <i class="ri-github-fill text-white dark:text-zinc-900"></i>
+                                </div>
+                            </div>
+                            <div class="text-[13px] leading-tight">
+                                <div class="font-medium">Trusted by builders</div>
+                                <div class="text-zinc-500">Open source • 2+ repos</div>
+                            </div>
+                        </div>
+                        <div class="h-8 w-px bg-zinc-200 dark:bg-zinc-800"></div>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/rudraxrd" target="_blank" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-colors"><i class="ri-github-line"></i></a>
+                            <a href="#" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-colors"><i class="ri-linkedin-line"></i></a>
+                            <a href="#" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-colors"><i class="ri-twitter-x-line"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Window -->
+                <div class="relative lg:h-[560px] animate-fade-in" style="animation-delay: 0.5s;">
+                    <div class="relative bg-white dark:bg-zinc-900 rounded-[24px] shadow-[0_32px_80px_-16px_rgba(0,0,0,0.15)] dark:shadow-[0_32px_80px_-16px_rgba(0,0,0,0.5)] border border-zinc-200/50 dark:border-zinc-800 overflow-hidden">
+                        <!-- Window header -->
+                        <div class="h-[52px] px-6 flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                            <div class="text-[12px] font-mono text-zinc-500 flex items-center gap-2">
+                                <i class="ri-code-s-slash-line"></i>
+                                portfolio.tsx
+                            </div>
+                            <div class="w-16"></div>
+                        </div>
+
+                        <!-- Code content -->
+                        <div class="p-6 font-mono text-[13px] leading-[1.7]">
+                            <div class="text-zinc-400">// crafting digital magic</div>
+                            <div class="mt-4">
+                                <span class="text-violet-500">const</span> <span class="text-zinc-900 dark:text-white font-medium">developer</span> <span class="text-zinc-400">=</span> <span class="text-zinc-400">{</span>
+                                <div class="pl-4 mt-1 space-y-1">
+                                    <div><span class="text-emerald-600 dark:text-emerald-400">name</span><span class="text-zinc-400">:</span> <span class="text-amber-600 dark:text-amber-300">"Rudra"</span><span class="text-zinc-400">,</span></div>
+                                    <div><span class="text-emerald-600 dark:text-emerald-400">role</span><span class="text-zinc-400">:</span> <span class="text-amber-600 dark:text-amber-300">"Full-Stack Dev"</span><span class="text-zinc-400">,</span></div>
+                                    <div><span class="text-emerald-600 dark:text-emerald-400">location</span><span class="text-zinc-400">:</span> <span class="text-amber-600 dark:text-amber-300">"India • Remote"</span><span class="text-zinc-400">,</span></div>
+                                    <div><span class="text-emerald-600 dark:text-emerald-400">stack</span><span class="text-zinc-400">:</span> <span class="text-zinc-400">[</span><span class="text-amber-600 dark:text-amber-300">"React", "Next.js", "Node"</span><span class="text-zinc-400">]</span><span class="text-zinc-400">,</span></div>
+                                    <div><span class="text-emerald-600 dark:text-emerald-400">passion</span><span class="text-zinc-400">:</span> <span class="text-violet-500">true</span><span class="text-zinc-400">,</span></div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-emerald-600 dark:text-emerald-400">status</span><span class="text-zinc-400">:</span>
+                                        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-[11px]">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                            building
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text-zinc-400">}</div>
+                            </div>
+
+                            <div class="mt-6">
+                                <span class="text-violet-500">function</span> <span class="text-blue-600 dark:text-blue-400">createMagic</span><span class="text-zinc-400">() {</span>
+                                <div class="pl-4 mt-1">
+                                    <span class="text-violet-500">return</span> <span class="text-amber-600 dark:text-amber-300">"✨ exceptional UX"</span>
+                                </div>
+                                <span class="text-zinc-400">}</span>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                                <div class="flex items-center gap-2 text-[11px] text-zinc-500">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    All systems operational
+                                </div>
+                                <div class="text-[11px] text-zinc-400">⌘ K to explore</div>
+                            </div>
+                        </div>
+
+                        <!-- Floating badges -->
+                        <div class="absolute -top-3 -right-3 px-3 py-1.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-[11px] font-medium shadow-lg rotate-3">
+                            ⚡ Fast & Responsive
+                        </div>
+                    </div>
+
+                    <!-- Background cards -->
+                    <div class="absolute -z-10 top-8 -right-6 w-full h-full bg-gradient-to-br from-violet-500/10 to-indigo-500/10 rounded-[24px] rotate-3"></div>
+                    <div class="absolute -z-20 top-16 -right-12 w-full h-full bg-gradient-to-br from-fuchsia-500/5 to-violet-500/5 rounded-[24px] rotate-6"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work / Projects -->
+    <section id="work" class="py-24 lg:py-32 relative">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-[12px] font-mono tracking-widest text-zinc-500 mb-4">
+                        <span class="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></span>
+                        SELECTED WORK • 2023 — 2025
+                    </div>
+                    <h2 class="font-space font-bold text-[36px] lg:text-[52px] leading-[0.9] tracking-[-0.03em]">Things I've<br>built & shipped</h2>
+                </div>
+                <p class="text-[17px] leading-[1.6] text-zinc-600 dark:text-zinc-400 max-w-[360px]">A collection of products, experiments, and open-source work focused on performance and user experience.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+                <!-- Project 1 -->
+                <div class="group relative bg-white dark:bg-zinc-900 rounded-[24px] border border-zinc-200 dark:border-zinc-800 overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 hover:shadow-[0_24px_64px_-16px_rgba(0,0,0,0.12)]">
+                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-violet-500 via-indigo-500 to-fuchsia-500 p-8 flex items-end">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        <div class="absolute top-6 right-6 flex gap-2">
+                            <span class="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur text-white text-[11px] font-medium">Next.js</span>
+                            <span class="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur text-white text-[11px] font-medium">AI</span>
+                        </div>
+                        <div class="relative w-full">
+                            <div class="w-full h-[180px] bg-white/90 dark:bg-zinc-900/90 backdrop-blur rounded-xl shadow-2xl border border-white/20 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                <div class="flex gap-1.5 mb-3">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-200"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-200"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-zinc-200"></div>
+                                </div>
+                                <div class="space-y-2.5">
+                                    <div class="h-3 w-3/4 bg-zinc-900 dark:bg-white rounded-full"></div>
+                                    <div class="h-2 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full"></div>
+                                    <div class="h-2 w-5/6 bg-zinc-200 dark:bg-zinc-700 rounded-full"></div>
+                                    <div class="pt-2 flex gap-2">
+                                        <div class="h-7 w-20 bg-zinc-900 dark:bg-white rounded-full"></div>
+                                        <div class="h-7 w-16 bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-7">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="font-space font-semibold text-[20px] leading-tight">Lumen — AI Writing Assistant</h3>
+                                <p class="mt-2 text-[14px] leading-[1.6] text-zinc-600 dark:text-zinc-400">An AI-native editor that helps you write 10x faster. Built with streaming, edge functions, and a custom prompt engine.</p>
+                            </div>
+                            <a href="#" class="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900 transition-colors">
+                                <i class="ri-arrow-right-up-line text-[18px]"></i>
+                            </a>
+                        </div>
+                        <div class="mt-5 flex items-center gap-2 text-[12px] font-mono text-zinc-500">
+                            <span>2024</span>
+                            <span>•</span>
+                            <span>12k+ users</span>
+                            <span>•</span>
+                            <span class="inline-flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Live</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative bg-white dark:bg-zinc-900 rounded-[24px] border border-zinc-200 dark:border-zinc-800 overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 hover:shadow-[0_24px_64px_-16px_rgba(0,0,0,0.12)]">
+                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 p-8 flex items-center justify-center">
+                        <div class="grid grid-cols-3 gap-3 w-full max-w-[280px] rotate-[-8deg] group-hover:rotate-[-4deg] transition-transform duration-700">
+                            <div class="space-y-3">
+                                <div class="h-24 bg-white/10 backdrop-blur rounded-xl border border-white/10"></div>
+                                <div class="h-16 bg-white/5 rounded-xl"></div>
+                            </div>
+                            <div class="space-y-3 pt-6">
+                                <div class="h-20 bg-white rounded-xl shadow-xl"></div>
+                                <div class="h-20 bg-white/10 backdrop-blur rounded-xl border border-white/10"></div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="h-16 bg-white/5 rounded-xl"></div>
+                                <div class="h-24 bg-white/10 backdrop-blur rounded-xl border border-white/10"></div>
+                            </div>
+                        </div>
+                        <div class="absolute top-6 left-6 px-2.5 py-1 rounded-full bg-white text-zinc-900 text-[11px] font-medium">Featured • 2024</div>
+                    </div>
+                    <div class="p-7">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="font-space font-semibold text-[20px] leading-tight">Vault — Minimal Finance Tracker</h3>
+                                <p class="mt-2 text-[14px] leading-[1.6] text-zinc-600 dark:text-zinc-400">Privacy-first finance app with bank-grade encryption, offline mode, and beautiful insights. No ads, no tracking.</p>
+                            </div>
+                            <a href="#" class="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900 transition-colors">
+                                <i class="ri-arrow-right-up-line text-[18px]"></i>
+                            </a>
+                        </div>
+                        <div class="mt-5 flex items-center gap-2 text-[12px] font-mono text-zinc-500">
+                            <span>React Native</span>
+                            <span>•</span>
+                            <span>4.9★ Rating</span>
+                            <span>•</span>
+                            <span>Open Source</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group relative bg-white dark:bg-zinc-900 rounded-[24px] border border-zinc-200 dark:border-zinc-800 overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 hover:shadow-[0_24px_64px_-16px_rgba(0,0,0,0.12)]">
+                    <div class="aspect-[16/10] relative overflow-hidden bg-[#f5f5f4] dark:bg-zinc-800 p-0 flex">
+                        <div class="flex-1 p-6 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <div class="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white flex items-center justify-center text-white dark:text-zinc-900"><i class="ri-flashlight-line text-[20px]"></i></div>
+                                <div>
+                                    <div class="font-medium text-[15px]">Deployments</div>
+                                    <div class="text-[12px] text-zinc-500">Last 24 hours</div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between text-[12px]"><span>api.prod</span><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px]">Live</span></div>
+                                <div class="h-1.5 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div class="h-full w-[92%] bg-zinc-900 dark:bg-white rounded-full"></div></div>
+                            </div>
+                        </div>
+                        <div class="w-px bg-zinc-200 dark:bg-zinc-700"></div>
+                        <div class="flex-1 bg-white dark:bg-zinc-900 p-6">
+                            <div class="font-mono text-[11px] text-zinc-500 mb-3">~/deploy.log</div>
+                            <div class="font-mono text-[11px] leading-[1.6] space-y-1">
+                                <div class="text-zinc-400">$ npm run build</div>
+                                <div class="text-emerald-600">✓ Built in 1.2s</div>
+                                <div class="text-zinc-400">$ vercel deploy</div>
+                                <div class="text-emerald-600">✓ Deployed • 847ms</div>
+                                <div class="text-violet-600">→ https://app.link</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="font-space font-semibold text-[20px] leading-tight">Ship — Deploy in Seconds</h3>
+                        <p class="mt-2 text-[14px] leading-[1.6] text-zinc-600 dark:text-zinc-400">CLI + dashboard for instant previews, rollbacks, and edge caching. Loved by 2k+ developers.</p>
+                        <div class="mt-4 flex gap-2">
+                            <span class="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[11px] font-medium">TypeScript</span>
+                            <span class="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[11px] font-medium">Go</span>
+                            <span class="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[11px] font-medium">Cloudflare</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="group relative bg-white dark:bg-zinc-900 rounded-[24px] border border-zinc-200 dark:border-zinc-800 overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-300 hover:shadow-[0_24px_64px_-16px_rgba(0,0,0,0.12)]">
+                    <div class="aspect-[16/10] relative overflow-hidden bg-gradient-to-br from-amber-300 via-orange-400 to-pink-400 p-8 flex items-center justify-center">
+                        <div class="bg-white dark:bg-zinc-900 rounded-[16px] shadow-[0_20px_60px_-12px_rgba(0,0,0,0.3)] p-5 w-full max-w-[300px] rotate-2 group-hover:rotate-0 transition-transform duration-500">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-2">
+                                    <img src="https://i.pravatar.cc/100?img=12" class="w-8 h-8 rounded-full" alt="">
+                                    <div class="text-[12px] leading-tight"><div class="font-medium">Rudra</div><div class="text-zinc-500">Design System</div></div>
+                                </div>
+                                <div class="w-6 h-6 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center"><i class="ri-more-line text-[14px]"></i></div>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2">
+                                <div class="aspect-square rounded-xl bg-violet-500"></div>
+                                <div class="aspect-square rounded-xl bg-zinc-900 dark:bg-white"></div>
+                                <div class="aspect-square rounded-xl bg-zinc-100 dark:bg-zinc-800"></div>
+                                <div class="aspect-square rounded-xl bg-amber-400"></div>
+                                <div class="aspect-square rounded-xl bg-zinc-100 dark:bg-zinc-800"></div>
+                                <div class="aspect-square rounded-xl bg-emerald-400"></div>
+                                <div class="aspect-square rounded-xl bg-zinc-900 dark:bg-white"></div>
+                                <div class="aspect-square rounded-xl bg-zinc-100 dark:bg-zinc-800"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-7">
+                        <h3 class="font-space font-semibold text-[20px] leading-tight">Prism — Design System & Tokens</h3>
+                        <p class="mt-2 text-[14px] leading-[1.6] text-zinc-600 dark:text-zinc-400">Production-ready design system used across 10+ products. Figma + code, 100% accessible, zero runtime.</p>
+                        <div class="mt-4 flex gap-2">
+                            <span class="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[11px] font-medium">Figma</span>
+                            <span class="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[11px] font-medium">Tailwind</span>
+                            <span class="px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[11px] font-medium">Storybook</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 flex justify-center">
+                <a href="https://github.com/rudraxrd" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-[14px] font-medium hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+                    <i class="ri-github-line"></i>
+                    View all projects on GitHub
+                    <i class="ri-arrow-right-line"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Skills -->
+    <section id="about" class="py-24 lg:py-32 bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800/50">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-16 lg:gap-24 items-start">
+                <div class="sticky top-28">
+                    <div class="inline-flex items-center gap-2 text-[12px] font-mono tracking-widest text-zinc-500 mb-6">
+                        <span class="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></span>
+                        ABOUT ME
+                    </div>
+                    <h2 class="font-space font-bold text-[32px] lg:text-[44px] leading-[0.95] tracking-[-0.03em] mb-8">
+                        Developer who cares about the details
+                    </h2>
+                    <div class="relative w-full aspect-[4/3] rounded-[24px] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-500/20 via-transparent to-indigo-500/20"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-32 h-32 rounded-[24px] bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center font-space font-bold text-[48px] shadow-2xl rotate-3">R</div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-xl p-3 flex items-center justify-between border border-zinc-200/50 dark:border-zinc-800">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                                <span class="text-[12px] font-medium">Available for freelance</span>
+                            </div>
+                            <span class="text-[11px] text-zinc-500 font-mono">IST • GMT+5:30</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div class="space-y-6 text-[17px] leading-[1.7] text-zinc-600 dark:text-zinc-400">
+                        <p class="text-[20px] leading-[1.5] text-zinc-900 dark:text-white font-medium">
+                            I'm Rudra, a full-stack developer with 3+ years of building products that people actually use.
+                        </p>
+                        <p>
+                            I started coding at 15, fell in love with the web, and never looked back. What drives me is the intersection of <span class="text-zinc-900 dark:text-white font-medium">great design, fast performance, and meaningful problems</span>.
+                        </p>
+                        <p>
+                            Previously, I've helped startups ship 0→1 products, scaled systems to millions of requests, and contributed to open-source tools used by thousands of developers. I believe good software feels invisible — it just works.
+                        </p>
+                        <p>
+                            When I'm not coding, you'll find me exploring new coffee shops, reading about design systems, or tinkering with AI experiments.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 py-8 border-y border-zinc-100 dark:border-zinc-800">
+                        <div>
+                            <div class="font-space font-bold text-[28px] leading-none">3+</div>
+                            <div class="mt-2 text-[13px] text-zinc-500 leading-tight">Years building<br>for the web</div>
+                        </div>
+                        <div>
+                            <div class="font-space font-bold text-[28px] leading-none">20+</div>
+                            <div class="mt-2 text-[13px] text-zinc-500 leading-tight">Projects<br>shipped</div>
+                        </div>
+                        <div>
+                            <div class="font-space font-bold text-[28px] leading-none">100%</div>
+                            <div class="mt-2 text-[13px] text-zinc-500 leading-tight">Attention to<br>details</div>
+                        </div>
+                    </div>
+
+                    <div id="skills">
+                        <h3 class="font-space font-semibold text-[18px] mb-6">Tech I love working with</h3>
+                        <div class="space-y-8">
+                            <div>
+                                <div class="text-[12px] font-mono tracking-widest text-zinc-500 mb-3">FRONTEND</div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-pill">React</span>
+                                    <span class="skill-pill">Next.js 14</span>
+                                    <span class="skill-pill">TypeScript</span>
+                                    <span class="skill-pill">Tailwind CSS</span>
+                                    <span class="skill-pill">Framer Motion</span>
+                                    <span class="skill-pill">Vite</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-[12px] font-mono tracking-widest text-zinc-500 mb-3">BACKEND & INFRA</div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-pill">Node.js</span>
+                                    <span class="skill-pill">PostgreSQL</span>
+                                    <span class="skill-pill">Prisma</span>
+                                    <span class="skill-pill">Redis</span>
+                                    <span class="skill-pill">Cloudflare</span>
+                                    <span class="skill-pill">Docker</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-[12px] font-mono tracking-widest text-zinc-500 mb-3">TOOLS & MINDSET</div>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-pill">Figma</span>
+                                    <span class="skill-pill">Git & GitHub</span>
+                                    <span class="skill-pill">Vercel</span>
+                                    <span class="skill-pill">System Design</span>
+                                    <span class="skill-pill">Accessibility</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="py-24 lg:py-32">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+            <div class="max-w-[720px]">
+                <div class="inline-flex items-center gap-2 text-[12px] font-mono tracking-widest text-zinc-500 mb-4">
+                    <span class="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></span>
+                    EXPERIENCE
+                </div>
+                <h2 class="font-space font-bold text-[32px] lg:text-[44px] leading-[0.95] tracking-[-0.03em] mb-16">Where I've been & what I've learned</h2>
+
+                <div class="space-y-12 relative">
+                    <div class="absolute left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-zinc-900 dark:from-white via-zinc-300 dark:via-zinc-700 to-transparent"></div>
+
+                    <div class="relative flex gap-6 group">
+                        <div class="w-8 h-8 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform"><i class="ri-briefcase-4-line text-[16px]"></i></div>
+                        <div class="flex-1 pb-12 border-b border-zinc-100 dark:border-zinc-800">
+                            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                                <div>
+                                    <h3 class="font-space font-semibold text-[18px]">Full-Stack Developer • Freelance</h3>
+                                    <div class="text-[14px] text-zinc-500 mt-1">Remote • Building products for startups</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-[12px] font-medium">2023 — Now</span>
+                            </div>
+                            <p class="text-[15px] leading-[1.6] text-zinc-600 dark:text-zinc-400">Shipping MVPs, design systems, and scalable APIs. Worked with 8+ founders from idea to launch. Focus on Next.js, performance, and delightful UX.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative flex gap-6 group">
+                        <div class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform"><i class="ri-code-box-line text-[16px]"></i></div>
+                        <div class="flex-1 pb-12 border-b border-zinc-100 dark:border-zinc-800">
+                            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                                <div>
+                                    <h3 class="font-space font-semibold text-[18px]">Open Source Contributor</h3>
+                                    <div class="text-[14px] text-zinc-500 mt-1">GitHub • Community driven</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[12px] font-medium">2022 — Now</span>
+                            </div>
+                            <p class="text-[15px] leading-[1.6] text-zinc-600 dark:text-zinc-400">Contributing to web tooling, UI libraries, and developer experience. Learning in public and helping others ship faster.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative flex gap-6 group">
+                        <div class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-1 group-hover:scale-110 transition-transform"><i class="ri-graduation-cap-line text-[16px]"></i></div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+                                <div>
+                                    <h3 class="font-space font-semibold text-[18px]">Self-Taught Journey</h3>
+                                    <div class="text-[14px] text-zinc-500 mt-1">Internet, docs, building & breaking things</div>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-[12px] font-medium">2021 — Now</span>
+                            </div>
+                            <p class="text-[15px] leading-[1.6] text-zinc-600 dark:text-zinc-400">Started with HTML/CSS, fell down the rabbit hole. Now obsessed with web performance, accessibility, and crafting tools people love.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 lg:py-32 bg-zinc-900 dark:bg-zinc-950 text-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-violet-600/20 via-indigo-600/20 to-fuchsia-600/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+            <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue-600/10 via-cyan-600/10 to-teal-600/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4"></div>
+        </div>
+
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-[12px] font-mono tracking-widest text-zinc-400 mb-6">
+                        <span class="w-8 h-px bg-zinc-700"></span>
+                        GET IN TOUCH
+                    </div>
+                    <h2 class="font-space font-bold text-[40px] lg:text-[64px] leading-[0.9] tracking-[-0.04em] mb-6">
+                        Let's build<br>
+                        <span class="text-zinc-500">something</span><br>
+                        great together
+                    </h2>
+                    <p class="text-[18px] leading-[1.6] text-zinc-400 max-w-[480px] mb-10">
+                        Have an idea? Need a developer who cares about the details? I'm currently available for freelance and full-time opportunities.
+                    </p>
+
+                    <div class="space-y-4">
+                        <a href="mailto:hello@rudraxrd.dev" class="flex items-center gap-4 group">
+                            <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center group-hover:bg-white group-hover:text-zinc-900 transition-colors"><i class="ri-mail-line text-[20px]"></i></div>
+                            <div>
+                                <div class="text-[13px] text-zinc-500">Email me at</div>
+                                <div class="font-medium text-[16px] group-hover:underline">hello@rudraxrd.dev</div>
+                            </div>
+                        </a>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur flex items-center justify-center"><i class="ri-map-pin-line text-[20px]"></i></div>
+                            <div>
+                                <div class="text-[13px] text-zinc-500">Based in</div>
+                                <div class="font-medium text-[16px]">India • Remote Worldwide</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex gap-3">
+                        <a href="https://github.com/rudraxrd" target="_blank" class="w-11 h-11 rounded-full bg-white text-zinc-900 flex items-center justify-center hover:scale-105 transition-transform"><i class="ri-github-fill text-[20px]"></i></a>
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-zinc-900 transition-colors"><i class="ri-linkedin-fill text-[20px]"></i></a>
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 backdrop-blur flex items-center justify-center hover:bg-white hover:text-zinc-900 transition-colors"><i class="ri-twitter-x-fill text-[20px]"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-zinc-900 rounded-[24px] p-8 lg:p-10 text-zinc-900 dark:text-white shadow-[0_32px_80px_-16px_rgba(0,0,0,0.5)]">
+                    <h3 class="font-space font-semibold text-[22px] mb-2">Send a message</h3>
+                    <p class="text-[14px] text-zinc-500 dark:text-zinc-400 mb-8">I'll get back to you within 24 hours. Promise.</p>
+
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="text-[12px] font-medium tracking-wide text-zinc-700 dark:text-zinc-300 mb-2 block">YOUR NAME</label>
+                                <input type="text" required placeholder="Rudra Patel" class="w-full h-[48px] px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-white focus:border-transparent transition-all text-[14px]">
+                            </div>
+                            <div>
+                                <label class="text-[12px] font-medium tracking-wide text-zinc-700 dark:text-zinc-300 mb-2 block">EMAIL ADDRESS</label>
+                                <input type="email" required placeholder="you@company.com" class="w-full h-[48px] px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-white focus:border-transparent transition-all text-[14px]">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-[12px] font-medium tracking-wide text-zinc-700 dark:text-zinc-300 mb-2 block">WHAT ARE YOU BUILDING?</label>
+                            <select class="w-full h-[48px] px-4 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-white focus:border-transparent transition-all text-[14px]">
+                                <option>New product / MVP</option>
+                                <option>Website / Landing page</option>
+                                <option>Design System</option>
+                                <option>Something else</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[12px] font-medium tracking-wide text-zinc-700 dark:text-zinc-300 mb-2 block">MESSAGE</label>
+                            <textarea required rows="4" placeholder="Tell me about your project, timeline, and budget..." class="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-white focus:border-transparent transition-all text-[14px] resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full h-[52px] rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium text-[15px] flex items-center justify-center gap-2 hover:scale-[0.98] active:scale-[0.96] transition-transform">
+                            Send Message
+                            <i class="ri-send-plane-line"></i>
+                        </button>
+                        <div class="text-center text-[12px] text-zinc-500">Average response time • 3 hours</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-zinc-950 text-zinc-400 border-t border-zinc-900">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-white text-zinc-900 flex items-center justify-center font-space font-bold">R</div>
+                        <span class="font-space font-semibold text-white">rudraxrd</span>
+                    </div>
+                    <div class="text-[13px] leading-[1.6] max-w-[320px]">Crafting fast, accessible, and delightful digital experiences. Available for new projects worldwide.</div>
+                </div>
+                <div class="flex gap-12 text-[13px]">
+                    <div>
+                        <div class="font-medium text-white mb-3">Navigation</div>
+                        <div class="space-y-2">
+                            <a href="#work" class="block hover:text-white transition-colors">Work</a>
+                            <a href="#about" class="block hover:text-white transition-colors">About</a>
+                            <a href="#contact" class="block hover:text-white transition-colors">Contact</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-medium text-white mb-3">Connect</div>
+                        <div class="space-y-2">
+                            <a href="https://github.com/rudraxrd" target="_blank" class="block hover:text-white transition-colors">GitHub</a>
+                            <a href="#" class="block hover:text-white transition-colors">LinkedIn</a>
+                            <a href="mailto:hello@rudraxrd.dev" class="block hover:text-white transition-colors">Email</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between gap-4 text-[12px] font-mono">
+                <div>© 2025 Rudra. Built with ♥, Tailwind & a lot of coffee.</div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    All systems operational • Last deploy: today
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
